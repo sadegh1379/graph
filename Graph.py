@@ -85,7 +85,38 @@ class Graph:
 
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
+    def bfs(self, start_vertex):
+        queue = [start_vertex]
+        start_vertex.visited = True
+        print("BFS ****:")
 
+        while queue:
+            current_vertex = queue.pop(0)
+            print(current_vertex.element, end=' ')
+
+            for neighbor in self._outgoing[current_vertex]:
+                if not neighbor.is_visited():
+                    neighbor.visited = True
+                    queue.append(neighbor)
+
+    def dfs(self, start_vertex):
+        queue = [start_vertex]
+        current_vertex = queue.pop(0)
+        for neighbor in self._outgoing[current_vertex]:
+                if neighbor.is_visited():
+                    neighbor.visited = False
+                    queue.append(neighbor)
+        print("DFS ***:")
+        self._dfs(start_vertex)
+
+    def _dfs(self, vertex):
+        vertex.visited = True
+        print(vertex.element, end=' ')
+
+        for neighbor in self._outgoing[vertex]:
+            if not neighbor.is_visited():
+                self._dfs(neighbor)
+                
 g = Graph()
 g = Graph(directed=1)
 n = int(input('Enter vertex number: '))
