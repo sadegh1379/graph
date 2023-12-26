@@ -117,7 +117,35 @@ class Graph:
             if not neighbor.is_visited():
                 self._dfs(neighbor)
                 
-g = Graph()
 g = Graph(directed=1)
 n = int(input('Enter vertex number: '))
 v = dict()
+
+for i in range (n) :
+    name = input('Vertex name : ')
+    v[name] = g.insert_vertex(name)
+
+m = int(input('Enter edge number: '))
+
+
+for i in range(m) :
+    yal = input('Please enter vertex like (1 -> 3): ').split()
+    v1 = yal[0]
+    v2= yal[1]
+
+    g.insert_edge(v[v1] , v[v2])
+
+print("Graph vertices:")
+for i in g.vertices():
+    print(i.element, end=' ')
+
+print("\nGraph edges:")
+for e in g.edges():
+    print(f"({e._origin.element}, {e._destination.element})", end=' ')
+
+b1 = input('\nEnter BFS start vertex : ')
+
+g.bfs(v[b1])
+
+d1 = input('\nEnter DFS start vertex :')
+g.dfs(v[d1])
